@@ -1,14 +1,7 @@
 module Spree
   class Printables::Order::InvoiceView < Printables::Invoice::BaseView
-    def_delegators :@printable,
-                   :email,
-                   :bill_address,
-                   :ship_address,
-                   :tax_address,
-                   :item_total,
-                   :total,
-                   :payments,
-                   :shipments
+    delegate :email, :bill_address, :ship_address, :tax_address, :item_total, :total,
+             :payments, :shipments, :shipment_total, to: :printable
 
     def items
       printable.line_items.map do |item|
